@@ -10,6 +10,7 @@ resource "aws_vpc" "main" {
     Name        = "fusionoms-${var.environment}-vpc"
     Environment = var.environment
     test = "github actions test tag !"
+    secondtest = "second"
   })
 }
 
