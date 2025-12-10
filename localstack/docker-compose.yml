@@ -1,0 +1,36 @@
+version : '3.8'
+services:
+  localstack:
+    container_name: fusionoms-localstack
+    # consider pining to 3.8 version
+    image: localstack/localstack:3.8
+    ports:
+      - "127.0.0.1:4566:4566"            # LocalStack Gateway
+      - "127.0.0.1:4510-4559:4510-4559"  # external services port range
+    environment:
+      # LocalStack configuration: https://docs.localstack.cloud/references/configuration/
+      - DEBUG=1
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      #optional services variable, deprecated since v2
+      #- SERVICES=s3,ec2,ecs,ecr,rds,elbv2,ssm,iam,acm,route53,logs,dynamodb,cloudformation,cloudwatch,events,sts,secretsmanager,kms
+      - AWS_DEFAULT_REGION=us-east-1
+      - EDGE_PORT=4566
+      - LAMBDA_EXECUTOR=local
+      - PERSISTENCE=1
+      - DATA_DIR=/persistent_data
+
+
+      ##  to fix Windows issues:
+     
+    volumes:
+      - //var/run/docker.sock:/var/run/docker.sock
+      #for unix - "/var/run/docker.sock:/var/run/docker.sock"
+      #- "./localstack-data:/tmp/localstack"
+
+      # this one will work instead of mounting tmp/localstack because no conflict, container is not trying to delete a mounted directory if no need for persistance remove and persistance = 0 or comment
+      - "./localstack-persistent:/persistent_data"
+      - "./scripts:/docker-entrypoint-initaws.d"
+
+
+
+      
