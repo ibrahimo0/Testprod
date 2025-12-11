@@ -9,6 +9,9 @@ resource "aws_vpc" "main" {
   tags = merge(var.common_tags, {
     Name        = "fusionoms-${var.environment}-vpc"
     Environment = var.environment
+    test = "github actions test tag !"
+    secondtest = "second"
+    fourthtag = "this time"
   })
 }
 
