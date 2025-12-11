@@ -70,7 +70,7 @@ jobs:
       - name: Terraform init
         run: |
           terraform init \
-            -backend-config="backend-config.hcl" \
+            -backend-config="backend-config-production.hcl" \
             -backend-config="key=production/terraform.tfstate"
 
       - name: Terraform apply
