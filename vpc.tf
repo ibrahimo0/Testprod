@@ -11,6 +11,7 @@ resource "aws_vpc" "main" {
     Environment = var.environment
     test = "github actions test tag !"
     secondtest = "second"
+    fourthtag = "this time"
   })
 }
 
