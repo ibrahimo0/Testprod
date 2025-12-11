@@ -38,7 +38,7 @@ jobs:
       - name: Terraform init
         run: |
           terraform init \
-            -backend-config="backend-config.hcl" \
+            -backend-config="backend-config-staging.hcl" \
             -backend-config="key=staging/terraform.tfstate"
 
       - name: Terraform validate
